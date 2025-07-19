@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS:GO Major Championship</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            align-items: center;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+  display: flex;
+  align-items: center;      /* alinha verticalmente */
+  gap: 10px;                /* espaçamento entre imagem e texto */
+}
+
+.logo-BagresCup {
+  height: 40px;             /* ajuste o tamanho conforme necessário */
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff6b35;
+  margin: 0;                /* remove espaço extra em volta do h1 */
+}
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23111" width="1200" height="800"/><polygon fill="%23333" points="0,0 400,200 800,100 1200,300 1200,0"/><polygon fill="%23222" points="0,800 300,600 700,700 1200,500 1200,800"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Tournament Info */
+        .tournament-info {
+            padding: 5rem 0;
+            background-color: #111111;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid #333;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        /* Teams Section */
+        .teams {
+            padding: 5rem 0;
+            background-color: #0a0a0a;
+        }
+
+        .teams h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #ff6b35;
+        }
+
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #333;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.1);
+        }
+
+        .team-logo {
+            width: 80px;
+            height: 80px;
+            background: #ff6b35;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Schedule */
+        .schedule {
+            padding: 5rem 0;
+            background-color: #111111;
+        }
+
+        .schedule h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #ff6b35;
+        }
+
+        .schedule-item {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 2rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #333;
+        }
+
+        .match-teams {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .match-time {
+            color: #ff6b35;
+            font-weight: bold;
+        }
+
+        /* Prize Pool */
+        .prize-pool {
+            padding: 5rem 0;
+            background-color: #0a0a0a;
+            text-align: center;
+        }
+
+        .prize-pool h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #ff6b35;
+        }
+
+        .prize-amount {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: #ff6b35;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .schedule-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .prize-amount {
+                font-size: 2.5rem;
+            }
+        }
+
+      
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo"><img class="logo-BagresCup" src="bagresCup.png"> <h1>BagresCup CS2</h1></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#teams">Teams</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#brackets">Brackets</a></li>
+                <li><a href="#news">News</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <img  src="bagresCup.png">
+            <h1>BAGRESCUP CS2 2025</h1>
+            <p>BagresCup: os maiores nomes, os piores tiros e a corrida épica por uma premiação que vale menos que a dignidade!</p>
+            <a href="#teams" class="cta-button">View Teams</a>
+        </div>
+    </section>
+
+    <section class="tournament-info">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem; color: #ff6b35;">Tournament Information</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>📅 Date</h3>
+                    <p>July 18-25, 2025</p>
+                </div>
+                <div class="info-card">
+                    <h3>📍 Location</h3>
+                    <p>Your Home</p>
+                </div>
+                <div class="info-card">
+                    <h3>🎮 Format</h3>
+                    <p>2 Teams, Final</p>
+                </div>
+                <div class="info-card">
+                    <h3>🏆 Prize Pool</h3>
+                    <p>$1,000,000 PILA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section class="teams" id="teams">
+  <div class="container">
+    <h2>Participating Teams</h2>
+    <div class="teams-grid">
+
+      <div class="team-card"
+           role="link"
+           tabindex="0"
+           onclick="window.location.href='caramingua.html'"
+           onkeypress="if(event.key === 'Enter' || event.key === ' ') window.location.href='caramingua.html';"
+           style="cursor: pointer;">
+        <img src="caramingua/LOGO_CRMG.png" alt="">
+        <h3>Caramingua Gaming</h3>
+        <p>Brazil</p>
+      </div>
+
+      <div class="team-card"
+           role="link"
+           tabindex="0"
+           onclick="window.location.href='rdm.html'"
+           onkeypress="if(event.key === 'Enter' || event.key === ' ') window.location.href='rdm.html';"
+           style="cursor: pointer;">
+        <img src="rdm/rdm-removebg-preview.png" alt="">
+        <h3>RDM</h3>
+        <p>Brazil</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <section class="schedule" id="schedule">
+        <div class="container">
+            <h2>Match Schedule</h2>
+            <div class="schedule-item">
+                <div class="match-teams">RDM vs CRMG</div>
+                <div class="match-time">23:30 PM</div>
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="prize-pool">
+        <div class="container">
+            <h2>Prize Pool</h2>
+            <div class="prize-amount">1 Pack de foto do pezinho</div>
+            <p>The largest prize pool in CS:GO Major history</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tournament</h3>
+                    <a href="#">Schedule</a>
+                    <a href="#">Teams</a>
+                    <a href="#">Brackets</a>
+                    <a href="#">Results</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Watch</h3>
+                    <a href="#">Live Stream</a>
+                    <a href="#">VODs</a>
+                    <a href="#">Highlights</a>
+                    <a href="#">Mobile App</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Community</h3>
+                    <a href="#">Discord</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Reddit</a>
+                    <a href="#">Forums</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Press</a>
+                    <a href="#">Partnerships</a>
+                </div>
+            </div>
+            <p>&copy; 2024 CS:GO Major Championship. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
+            } else {
+                header.style.backgroundColor = 'rgba(26, 26, 26, 0.8)';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.info-card, .team-card, .schedule-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
